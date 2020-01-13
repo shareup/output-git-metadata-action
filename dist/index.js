@@ -7671,7 +7671,7 @@ function branch() {
     }
 }
 function isTrue(value) {
-    return true;
+    return value === true || value === 'true';
 }
 
 

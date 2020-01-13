@@ -37,5 +37,5 @@ function branch (): string | null {
 }
 
 function isTrue (value: boolean | string): boolean {
-  return true
+  return value === true || value === 'true'
 }
