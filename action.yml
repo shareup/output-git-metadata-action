@@ -1,0 +1,18 @@
+name: output-git-metadata-action
+description: GitHub action which outputs git metadata like sha, branch, etc to interpolate in a workflow yml or input into other actions
+
+outputs:
+  branch:
+    description: branch name if acting on a branch
+  issue_number:
+    description: issue number if related to a pull request
+  owner:
+    description: repo owner
+  repo:
+    description: repo name
+  sha:
+    description: sha of latest commit if known
+
+runs:
+  using: node12
+  main: dist/index.js
