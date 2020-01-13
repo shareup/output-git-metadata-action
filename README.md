@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: meta
+      - name: output git metadata
+        id: meta
         uses: shareup/output-git-metadata-action@master
       - name: print debugging info
         run: |
