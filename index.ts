@@ -1,27 +1,41 @@
-import { setOutput } from '@actions/core'
+import { getInput, setOutput } from '@actions/core'
 import { context } from '@actions/github'
 
-(() => {
-  setOutput('owner', context.repo.owner)
-  setOutput('repo', context.repo.repo)
+const debug = isTrue(getInput('debug'))
+
+;(() => {
+  output('owner', context.repo.owner)
+  output('repo', context.repo.repo)
 
   if (context.issue.number) {
-    setOutput('issue_number', context.issue.number.toString())
+    output('issue_number', context.issue.number.toString())
   }
 
-  setOutput('branch', branch())
-  setOutput('sha', sha())
+  output('branch', branch())
+  output('sha', sha())
 })()
 
-function sha () {
+function output (name: string, value: string) {
+  if (debug) {
+    console.debug('outputting', name, value)
+  }
+
+  setOutput(name, value)
+}
+
+function sha (): string | null {
   return context.payload.after
 }
 
-function branch () {
+function branch (): string | null {
   if (context.payload.pull_request) {
     return context.payload.pull_request.head.ref
   } else {
     // the first two segments are not the branch
     return context.ref.split('/').slice(2).join('/')
   }
+}
+
+function isTrue (value: boolean | string): boolean {
+  return true
 }

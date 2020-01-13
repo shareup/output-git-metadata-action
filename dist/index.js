@@ -7642,15 +7642,22 @@ module.exports = {"activity":{"checkStarringRepo":{"method":"GET","params":{"own
 exports.__esModule = true;
 var core_1 = __webpack_require__(470);
 var github_1 = __webpack_require__(469);
+var debug = isTrue(core_1.getInput('debug'));
 (function () {
-    core_1.setOutput('owner', github_1.context.repo.owner);
-    core_1.setOutput('repo', github_1.context.repo.repo);
+    output('owner', github_1.context.repo.owner);
+    output('repo', github_1.context.repo.repo);
     if (github_1.context.issue.number) {
-        core_1.setOutput('issue_number', github_1.context.issue.number.toString());
+        output('issue_number', github_1.context.issue.number.toString());
     }
-    core_1.setOutput('branch', branch());
-    core_1.setOutput('sha', sha());
+    output('branch', branch());
+    output('sha', sha());
 })();
+function output(name, value) {
+    if (debug) {
+        console.debug('outputting', name, value);
+    }
+    core_1.setOutput(name, value);
+}
 function sha() {
     return github_1.context.payload.after;
 }
@@ -7662,6 +7669,9 @@ function branch() {
         // the first two segments are not the branch
         return github_1.context.ref.split('/').slice(2).join('/');
     }
+}
+function isTrue(value) {
+    return true;
 }
 
 

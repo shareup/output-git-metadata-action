@@ -1,6 +1,12 @@
 name: output-git-metadata-action
 description: GitHub action which outputs git metadata like sha, branch, etc to interpolate in a workflow yml or input into other actions
 
+inputs:
+  debug:
+    required: false
+    description: If true, then output debugging information
+    default: false
+
 outputs:
   branch:
     description: branch name if acting on a branch
