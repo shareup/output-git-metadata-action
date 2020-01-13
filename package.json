@@ -1,0 +1,26 @@
+{
+  "name": "output-git-metadata-action",
+  "version": "0.0.1",
+  "description": "GitHub action which outputs git metadata like sha, branch, etc to interpolate in a workflow yml or input into other actions",
+  "main": "index.ts",
+  "repository": "https://github.com/shareup/output-git-metadata-action",
+  "author": "Nathan Herald <nathan@shareup.app>",
+  "license": "MIT",
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
+  },
+  "scripts": {
+    "lint": "standard",
+    "package": "ncc build index.ts -o dist -s"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.21.0",
+    "standard": "^14.3.1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.1",
+    "@actions/github": "^2.0.1"
+  }
+}
